@@ -2,9 +2,9 @@
 #include <iostream>
 #include <string>
 using namespace std;
+char abc[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
 string ceasarCipher(string text, int shift) {
-  char abc[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (int i = 0; i < text.length(); ++i)
     if (text[i] >= 'A' && text[i] <= 'Z')
       text[i] = abc[(text[i]-'A'+shift)%26];
@@ -14,15 +14,23 @@ string ceasarCipher(string text, int shift) {
 int main() {
   string plainTxt, cipherTxt;
   int matrixNo;
-
-  cout << "Matric No.: ";
-  cin >> matrixNo;
-  cin.ignore();
-  cout << "Plain Text:  ";
-  getline(cin, plainTxt);
-
-  cipherTxt = ceasarCipher(plainTxt, matrixNo % 10);
-  cout << "Cipher Text: " << cipherTxt << endl;
-
+  while (true){
+    cout << "Shift Number: ";
+    cin >> matrixNo;
+    cin.ignore();
+    cout << "Plain Text:  ";
+    getline(cin, plainTxt);
+    for(int i=0 ; i<plainTxt.length(); ++i){
+        if(plainTxt[i]==abc[26]){
+            continue;
+        }
+        plainTxt[i]= toupper(plainTxt[i]);
+    }
+    cipherTxt = ceasarCipher(plainTxt, matrixNo);
+    cout << "Cipher Text: " << cipherTxt << endl;
+    cout << endl;
+  }
+  
+ 
   return 0;
 }
