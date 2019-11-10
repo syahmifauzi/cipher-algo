@@ -27,8 +27,10 @@ int main() {
   cin >> plainText;
 
   // Pad the string with zeros
-  if (plainText.length() % keySize != 0)
-    plainText += string(plainText.length() % keySize, '0');
+  if (plainText.length() % keySize != 0) {
+    plainText += string(keySize - (plainText.length() % keySize), '0');
+    printf("----> New Plaintext is: %s\n", plainText.c_str());
+  }
 
   // Encryption begin
   rep(i, 0, plainText.length() / keySize) {
