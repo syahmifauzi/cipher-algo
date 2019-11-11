@@ -71,6 +71,7 @@ int main() {
 
   // Get the inverse M and then mod it with N
   M = getInverseMUsingGaloisFields(M, N) % N;
+  printf("----> Inverse M: %d\n\n", M);
 
   printf("Enter Ciphertext separated by space (end with -1): ");
   while (scanf("%d", &tmp) == 1 && tmp != -1) cipherText.push_back(tmp);
@@ -78,10 +79,10 @@ int main() {
   // Decryption begin
   // Convert each cipherText value using inverse M
   // Formula: CipherText * M_inverse mod N
-  rep(i, 0, cipherText.size())
-    cipherText[i] = cipherText[i] * M % N;
+  rep(i, 0, cipherText.size()) cipherText[i] = cipherText[i] * M % N;
 
   rep(i, 0, cipherText.size()) { // for each cipherText value
+    printf("----> cipherText[%d]: %d = ", i + 1, cipherText[i]);
     eachPlainText = ""; // always initialize each string
     for (int j = keySize - 1; j >= 0; --j) { // decrypt it based on SIK
       if (cipherText[i] >= sik[j]) {
@@ -93,12 +94,19 @@ int main() {
     }
     // Don't forget to reverse eachPlainText string
     reverse(eachPlainText.begin(), eachPlainText.end());
+    printf("%s\n", eachPlainText.c_str());
     // Then add it to the final plainText string
     plainText += eachPlainText;
   }
 
   // Tadaaa!!
-  printf("\n----> Plaintext Produced: %s\n\n", plainText.c_str());
+  printf("\n----> Plaintext Produced: %s\n", plainText.c_str());
+
+  // Remove leading zeros
+  plainText.erase(0, min(plainText.find('1'), plainText.size()-1));
+
+  // Tadaa!!
+  printf("----> Original Plaintext: %s\n\n", plainText.c_str());
 
   return 0;
 }
