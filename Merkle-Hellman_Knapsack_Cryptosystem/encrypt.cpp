@@ -28,7 +28,7 @@ int main() {
 
   // Pad the string with zeros
   if (plainText.length() % keySize != 0) {
-    plainText += string(keySize - (plainText.length() % keySize), '0');
+    plainText = string(keySize - (plainText.length() % keySize), '0') + plainText;
     printf("----> New Plaintext is: %s\n", plainText.c_str());
   }
 
