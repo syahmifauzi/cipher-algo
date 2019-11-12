@@ -43,6 +43,7 @@ int main() {
   scanf("%d", &keySize);
 
   do {
+    sik.clear(); // Empty the vector before use
     printf("Enter SuperIncreasing Knapsack of size %d separated by space: ", keySize);
     rep(i, 0, keySize) {
       scanf("%d", &tmp);
